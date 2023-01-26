@@ -38,7 +38,7 @@ async def run(relays, cls, verbose):
     except (ImportError, AttributeError):
         click.echo("Class not found")
         return -1
-    logging.basicConfig(format='%(asctime)s %(name)s %(levelname)s %(message)s', level=logging.DEBUG if verbose else logging.INFO)
+    logging.basicConfig(format='%(asctime)s %(name)s %(levelname)s – %(message)s', level=logging.DEBUG if verbose else logging.INFO)
     bot = bot_class()
     if relays:
         bot.RELAYS = relays

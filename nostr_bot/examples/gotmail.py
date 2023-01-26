@@ -45,4 +45,7 @@ class GotMailBot(NostrBot):
         announcement = f"You've got {kind} from {name}"
         self.log.info(announcement)
         command = ["say", announcement, f"-v", self.VOICE]
-        subprocess.run(command)
+        try:
+            subprocess.run(command)
+        except FileNotFoundError:
+            self.log.error("Cannot speak the announcement")
