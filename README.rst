@@ -18,6 +18,19 @@ nostr bot
 
 A Python nostr bot framework
 
+To install:
+
+``pip install nostr-bot``
+
+To run:
+
+``nostr-bot run``
+
+For instance:
+``PUBLIC_KEY=84dee6e676e5bb67b4ad4e042cf70cbd8681155db535942fcc6a0533858a7240 KINDS=1,4,5,7 nostr-bot run -c nostr_bot.examples.gotmail.GotMailBot``
+
+See the examples_ for more ideas of what you can do!
+
 
 
 * Free software: BSD license
@@ -27,7 +40,9 @@ A Python nostr bot framework
 Features
 --------
 
-* TODO
+* RPC using ephemeral events
+* automatic reconnect
+* simple API
 
 Credits
 -------
@@ -36,3 +51,4 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. _examples: https://github.com/davestgermain/nostr_bot/tree/master/nostr_bot/examples
