@@ -3,8 +3,8 @@ nostr bot
 =========
 
 
-.. image:: https://img.shields.io/pypi/v/nostr_bot.svg
-        :target: https://pypi.python.org/pypi/nostr_bot
+.. image:: https://img.shields.io/pypi/v/nostr-bot.svg
+        :target: https://pypi.python.org/pypi/nostr-bot
 
 .. image:: https://img.shields.io/travis/davestgermain/nostr_bot.svg
         :target: https://travis-ci.com/davestgermain/nostr_bot
@@ -17,6 +17,7 @@ nostr bot
 
 
 A Python nostr bot framework
+
 
 
 * Free software: BSD license
