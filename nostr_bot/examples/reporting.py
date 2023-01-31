@@ -1,4 +1,8 @@
 """
+TattleBot will listen for kind=1984 reports and notify the subject of the report that they've been tattled on.
+
+You can subclass TattleBot and override handle_message(event, tattle_subject, message) to do something more interesting with the generated message
+Override create_message(event, report_type, tattled_event_id, impersonation) to generate a different response
 
 To run:
 TATTLE_WATCH=<mypubkey> NOSTR_KEY=<bot_private_key> nostr-bot run -c nostr_bot.examples.reporting.TattleBot -r wss://my.relay.biz
@@ -13,6 +17,8 @@ import time
 
 
 class TattleBot(CommunicatorBot):
+    SEND_MESSAGE = False
+
     shelf = shelve.open('tattlebot')
 
     def get_query(self):
@@ -89,9 +95,11 @@ Sent by TattleBot.
 
     async def handle_message(self, event, tattle_subject, message):
         if tattle_subject and message:
-            self.log.info("%s tattled on %s. Sending:\n%s", event.pubkey, tattle_subject, message)
-            # dm = self.make_dm(tattle_subject, content=message)
-            # self.log.debug(str(dm))
-            # await self.reply(dm)
-            # self.log.info("Alerted %s about tattling on %s with dm %s", tattle_subject, event.id, dm.id)
-            # return dm.id
+            if self.SEND_MESSAGE:
+                dm = self.make_dm(tattle_subject, content=message)
+                self.log.debug(str(dm))
+                await self.reply(dm)
+                self.log.info("Alerted %s about tattling on %s with dm %s", tattle_subject, event.id, dm.id)
+                return dm.id
+            else:
+                self.log.info("%s tattled on %s. Sending:\n%s", event.pubkey, tattle_subject, message)
