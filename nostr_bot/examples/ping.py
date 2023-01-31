@@ -8,8 +8,11 @@ from nostr_bot import RPCBot
 
 
 class PingBot(RPCBot):
-    LISTEN_PUBKEY = os.getenv("PUBLIC_KEY")
     ENCRYPTED = False
+
+    def __init__(self):
+        super().__init__()
+        self.LISTEN_PUBKEY = os.getenv("PUBLIC_KEY")
 
     async def on_ping(self, event, *args):
         self.log.info("Got ping %s", event)

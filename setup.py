@@ -10,7 +10,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=7.0', 'aionostr']
+requirements = ['Click>=7.0', 'aionostr>=0.11']
 
 test_requirements = [ ]
 

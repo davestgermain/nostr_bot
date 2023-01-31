@@ -31,10 +31,10 @@ class GotMailBot(NostrBot):
 
     async def handle_event(self, event):
         if event.pubkey not in self.seen_pubkeys:
-            self.seen_pubkeys[event.pubkey] = event.pubkey[:4]
+            self.seen_pubkeys[event.pubkey] = event.pubkey[-4:]
             async for profile in self.manager.get_events({"authors": [event.pubkey], "kinds": [0]}, single_event=True):
                 meta = json.loads(profile.content)
-                self.seen_pubkeys[event.pubkey] = meta.get('display_name', '') or meta.get('name', '') or event.pubkey[:4]
+                self.seen_pubkeys[event.pubkey] = meta.get('display_name', '') or meta.get('name', '') or event.pubkey[-4:]
 
         name = self.seen_pubkeys[event.pubkey]
         kind = "mail"
