@@ -68,11 +68,12 @@ class NostrBot:
         self._manager = manager
 
     async def start(self):
-        query = self.get_query()
-        self.log.info("Running query %s on %s", query, self.get_relays())
         if self.private_key:
             self.manager.private_key = self.private_key.hex()
         await self.manager.connect()
+
+        query = self.get_query()
+        self.log.info("Running query %s on %s", query, self.get_relays())
 
 
         async for event in self.manager.get_events(query, only_stored=False):

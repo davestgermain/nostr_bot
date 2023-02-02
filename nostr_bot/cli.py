@@ -11,7 +11,7 @@ except ImportError:
     pass
 
 
-DEFAULT_RELAYS = os.getenv('NOSTR_RELAYS', 'wss://nostr.mom,wss://relay.damus.io').split(',')
+DEFAULT_RELAYS = os.getenv('NOSTR_RELAYS', 'wss://nostr.mom,wss://relay.snort.social').split(',')
 
 def stop():
     loop = asyncio.get_running_loop()
