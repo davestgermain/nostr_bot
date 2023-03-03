@@ -58,3 +58,27 @@ class MirrorFollowersBot(NostrBot):
         self.log.info("Mirrored %s from %s to %s", event.id[:8], event.pubkey, self.TARGET_RELAY)
         self.set_last_seen(event.created_at)
         self.shelf[event.id] = time.time()
+
+
+class MirrorFOAFBot(MirrorFollowersBot):
+    """
+    Mirrors authors you follow, and their follows
+    """
+    async def get_following(self):
+        find_query = {
+            'kinds': [3],
+            'authors': [self.MY_PUBKEY]
+        }
+        following = set([self.MY_PUBKEY])
+        self.log.info("Getting following for %s %s", self.MY_PUBKEY, find_query)
+        async for event in self.manager.get_events(find_query):
+            for tag in event.tags:
+                if tag[0] == 'p':
+                    following.add(tag[1])
+        self.log.info("Getting extended network")
+        find_query['authors'] = list(following)
+        async for event in self.manager.get_events(find_query):
+            for tag in event.tags:
+                if tag[0] == 'p':
+                    following.add(tag[1])
+        return list(following)
